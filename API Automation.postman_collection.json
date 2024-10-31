@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "984d2394-4e45-4cb1-b3a9-99bbbf3f5df0",
+		"name": "API Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10191050",
+		"_collection_link": "https://qa-engineering-3702.postman.co/workspace/QA-Engineering-Workspace~cbc0036b-42de-4c33-92fb-2e7808c9e408/collection/10191050-984d2394-4e45-4cb1-b3a9-99bbbf3f5df0?action=share&source=collection_link&creator=10191050"
+	},
+	"item": [
+		{
+			"name": "Get Weather Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"pm.test(\"City name is London\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"London\");",
+							"});",
+							"",
+							"pm.test(\"Validate the response schema for required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    ",
+							"    const requiredFields = [\"coord\", \"weather\", \"base\", \"main\", \"visibility\", \"wind\", \"clouds\", \"dt\", \"sys\", \"timezone\", \"id\", \"name\", \"cod\"];",
+							"    ",
+							"    requiredFields.forEach(field => {",
+							"        pm.expect(responseData).to.have.property(field);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "668eeb32bfe379a973d79a0626263d85",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "668eeb32bfe379a973d79a0626263d85",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=668eeb32bfe379a973d79a0626263d85&units=imperial",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "London,uk"
+						},
+						{
+							"key": "APPID",
+							"value": "668eeb32bfe379a973d79a0626263d85"
+						},
+						{
+							"key": "units",
+							"value": "imperial"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
