@@ -14,4 +14,4 @@ jobs:
       run: npm install -g newman
 
     - name: Run Postman Tests
-      run: newman run weather-api-collection.json
+      run: newman run API automation.postman_collection.json
